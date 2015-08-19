@@ -1,3 +1,4 @@
+import re
 import logging
 from lanbilling import lb
 from lanbilling.exceptions import LBAPIError
@@ -12,16 +13,24 @@ class LANBilling(object):
         return cls.instance
 
     def __init__(self, manager='admin', password='', host='127.0.0.1', port=1502):
-        port = int(port)
+        self.manager = manager
+        self.host = host
+        self.port = int(port)
 
         self.logger = logging.getLogger(__name__)
 
         try:
-            self.lbapi = lb.Client(host, port)
+            self.lbapi = lb.Client(host, int(port))
             self.lbapi.Login(login=manager, password=password)
         except Exception as e:
             self.logger.debug(e)
             raise LBAPIError(e)
+
+    def __repr__(self):
+        return "LANBilling(manager={manager!r}, host={host!r}, port={port!r})".format(**self.__dict__)
+
+    def __str__(self):
+        return "Connected to {host}:{port} as {manager}".format(**self.__dict__)
 
     def __getattr__(self, method):
         return LBAPIMethod(self, method)
