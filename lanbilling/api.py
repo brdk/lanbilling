@@ -32,7 +32,7 @@ class LANBilling(object):
         except RuntimeError, e:
             raise LBAPIError(e)
 
-    def help(self, method_name):
+    def help(self, method_name=None):
         methods = self.lbapi.system_get_functors(None)
         if method_name is None:
             print 'Available methods:'
@@ -54,7 +54,8 @@ class LANBilling(object):
                 func.__doc__ += '\n'
                 return help(func)
         else:
-            raise AttributeError("Method {method_name} not found".format(method_name=method_name))
+            print("Method {method_name} not found".format(method_name=method_name))
+            return
 
 
 class LBAPIMethod(object):
