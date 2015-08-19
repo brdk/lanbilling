@@ -26,8 +26,14 @@ class LANBilling(object):
     def __getattr__(self, method):
         return LBAPIMethod(self, method)
 
-    def __call__(self, method, params):
+    def __call__(self, method, *args, **kwargs):
+        params = {}
+
         try:
+            if args and len(args) == 1 and type(args[0]) is dict:
+                params.update(args[0])
+            if kwargs:
+                params.update(kwargs)
             return self.lbapi.run(method, params)
         except RuntimeError, e:
             raise LBAPIError(e)
@@ -65,5 +71,6 @@ class LBAPIMethod(object):
         self._lb_session = lb_session
         self._method_name = method_name
 
-    def __call__(self, method_kwargs):
-        return self._lb_session(self._method_name, method_kwargs)
+    def __call__(self, *args, **kwargs):
+        return self._lb_session(self._method_name, *args, **kwargs)
+
