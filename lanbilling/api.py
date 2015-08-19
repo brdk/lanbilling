@@ -1,4 +1,3 @@
-import re
 import logging
 from lanbilling import lb
 from lanbilling.exceptions import LBAPIError
