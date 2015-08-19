@@ -115,6 +115,9 @@ class Client:
 
         return func
 
+    def __repr__(self):
+        return "Socket wrapper for LANBilling {host!r}:{port!r}".format(**self.__dict__)
+
     def run(self, method, params):
         self.idx += 1
         now_idx = self.idx
