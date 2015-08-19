@@ -16,6 +16,10 @@ import simplejson as json
 max_timeout = 600
 
 
+class RunningFlag:
+    pass
+
+
 def hdl(client):
     p = client()
     if p is None:
@@ -72,6 +76,7 @@ def hdl_msg(client):
 
 class Client:
     def __init__(self, host, port):
+        self.running = RunningFlag()
         self.host = host
         self.port = port
         try:
