@@ -1,6 +1,17 @@
 LANBilling
---------
+----------
 
+Installation:
+^^^^^^^^^^^^^
+
+| ``$ git clone https://github.com/brdk/lanbilling`` 
+| ``$ cd lanbilling``
+| ``$ python setup.py install``
+
+
+Usage:
+^^^^^^
+    
 To use, simply do::
 
     >>> from lanbilling import LANBilling
@@ -15,4 +26,3 @@ To show all possible methods::
 To get help for method usage::
 
     >>> lbapi.help('getAccount')
-
