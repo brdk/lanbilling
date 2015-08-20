@@ -4,7 +4,7 @@ LANBilling
 Installation:
 ^^^^^^^^^^^^^
 
-| ``$ git clone https://github.com/brdk/lanbilling`` 
+| ``$ git clone https://github.com/brdk/lanbilling.git``
 | ``$ cd lanbilling``
 | ``$ python setup.py install``
 
